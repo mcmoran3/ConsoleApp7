@@ -8,7 +8,7 @@ namespace DIS_Assignment_2_Fall_2021
     {
         static void Main(string[] args)
         {
-            //Question1:
+            //Question1
 
             Console.WriteLine("Question 1");
             int[] heights = { -5, 1, 5, 0, -7 };
@@ -123,18 +123,21 @@ namespace DIS_Assignment_2_Fall_2021
             try
             {
                 //write your code here.
-                int max = 0;
-                int[] high = new int[gain.Length + 1];
-                high[0] = 0;
-                for (int i = 0; i < gain.Length; i++)
+                int max = 0;// intializing an integer value of 0 
+                int[] high = new int[gain.Length + 1]; //setting an array of int data type equal to paramater 
+                                                        // length plus 1 
+                high[0] = 0; // array named high set equal to element 0 
+                for (int i = 0; i < gain.Length; i++) // starting the for loop , and incrementing until reaches 
+                                                        // parameter gain length 
                 {
-                    high[i + 1] = high[i] + gain[i];
+                    high[i + 1] = high[i] + gain[i]; // adding high array of current loop iteration to gain array of current iteration 
+                                                    // setting the next elemeent of high array equal to the addition two arrays above 
                 }
-                for (int g = 0; g < high.Length; g++)
+                for (int g = 0; g < high.Length; g++) // nested for loop iteration through the high array length 
                 {
-                    if (max < high[g])
+                    if (max < high[g]) // if max 0 is lessthan the current element of array high 
                     {
-                        max = high[g];
+                        max = high[g]; // set max equal to the current element of array high 
                     }
                 }
                return max; // returning the max alt value to the method as int value
@@ -170,22 +173,23 @@ namespace DIS_Assignment_2_Fall_2021
             try
             {
                 //Write your Code here.
-                int i = 0, j = nums.Length - 1;
-                while (i <= j)
+                int i = 0, j = nums.Length - 1; // setting variables i and j . j is equal to nums parameter array minus 1 
+                while (i <= j)                  // initizaling for while loop , continues until i 0 is less than or equal to array length minus 1
                 {
-                    int mid = i + (j - i) / 2;
-                    if (target == nums[mid])
+                    int mid = i + (j - i) / 2; // setting new int value equal to i minus J (array length minus 1) divided by 2
+                    if (target == nums[mid]) // boolean if statement , if target parameter is equal to element mids of array nums 
                     {
-                        return mid;
+                        return mid;          // then returning mid 
                     }
-                    else if (target > nums[mid])
+                    else if (target > nums[mid])  // if target int is greater than nums array element equal to mid variable , then set i
+                                                   //then set I equal to mid plus 1
                     {
                         i = mid + 1;
                     }
                     else
-                    { j = mid - 1; }
+                    { j = mid - 1; }          // else j is set equal to mid variable minus 1
                 }
-                return i;
+                return i;    // returning I variable to method
               //  return -1;
             }
             catch (Exception)
@@ -213,12 +217,26 @@ namespace DIS_Assignment_2_Fall_2021
         {
             try
             {
-                List<string> commonwords = new List<string>();
+                List<string> commonwords = new List<string>();  // initializing string called commonwords
                 //write your code here.
+                var x = words[0].ToCharArray().ToList(); //x is intersection  , setting x equal to words parameter , convert to list 
+                for (int i = 1; i < words.Length; i++) //setting for loop , runs until i is equal to words array length 
+                    for (int k = 0; k < x.Count; k++)// nested for loop , runs until k variable is equal or greater than count of x 
+                    {
+                        int index = words[i].IndexOf(x[k]); // setting int variable named index equal to current I iteration of words I of array x of K
+                        if (index >= 0)                     // if index variable above is greater than or equal to = 
+                            words[i] = words[i].Remove(index, 1); // set words array equal to current iteration , removing index 1
+                        else
+                        {
+                            x.RemoveAt(k);              // else x , remove at k values 
+                            k--;                        // reduce k 
+                        }
+                    }
 
+                commonwords = x.Select(ch => ch.ToString()).ToList(); // setting commonwords to list
+                 
 
-
-                return commonwords;
+                return commonwords;    // returning commonwords to method
             }
             catch (Exception)
             {
@@ -245,19 +263,19 @@ namespace DIS_Assignment_2_Fall_2021
             try
             {
                 //write your code here.
-                Dictionary<int, int> map = new Dictionary<int, int>();
-                foreach (int a in arr)
+                Dictionary<int, int> map = new Dictionary<int, int>();  // initializing dictionary , key and values are both int data type 
+                foreach (int a in arr)    // for each loop, looping through each integer in the array 
                 {
-                    if (map.ContainsKey(a))
-                        map[a] += 1;
+                    if (map.ContainsKey(a)) //if the map dictionary contains key value of the iteration of the loop
+                        map[a] += 1;        // add one to the map  dictionary key
                     else
-                        map[a] = 1;
+                        map[a] = 1;         // esle set dictionary key to 1
                 }
 
 
-                foreach (int v in map.Values)
+                foreach (int v in map.Values) // for each value in dictionary 
                 {
-                    if (map.Values.Where(val => val == v).Count() > 1)
+                    if (map.Values.Where(val => val == v).Count() > 1) // if there are multiple values found return true
                         return true;
                 }
                 return false ;
@@ -299,24 +317,24 @@ namespace DIS_Assignment_2_Fall_2021
             try
             {
                 //write your code here.
-                int index = 2;
-                if (ruleKey.Equals("type"))
+                int index = 2; // setting int named index to 2 
+                if (ruleKey.Equals("type")) // if rule key equals type set index to 0
                 {
                     index = 0;
                 }
-                else if (ruleKey.Equals("color"))
+                else if (ruleKey.Equals("color")) // if key equals color then set index to 1
                 {
                     index = 1;
                 }
-                int count = 0;
-                for (int i = 0; i < items.Count; i++)
+                int count = 0;       // initializing count variable of int data type
+                for (int i = 0; i < items.Count; i++) // starting for loop , ends when the i variable is equal or greater than the count of elements in the items string
                 {
-                    if (items[i][index].Equals(ruleValue))
+                    if (items[i][index].Equals(ruleValue)) // if the item array element equal to the current iteration of the loop and rulevalue , then increment the count plus 1
                     {
                         count++;
                     }
                 }
-                return count;
+                return count;   // returning the count of the loop
               //  return 0;
             }
             catch (Exception)
@@ -353,25 +371,24 @@ namespace DIS_Assignment_2_Fall_2021
             try
             {
                 //write your code here.
-                //Dictionary<int, int> dict = new Dictionary<int, int>();
+                Dictionary<int, int> dict = new Dictionary<int, int>(); // initializing the dictionary 
 
-                //int i = 0;
-                //int j = nums.Length - 1;
-                //int sum = nums[i] + nums[j];
-                //while (sum != target)
-                //{
-                //    if (sum < target)
-                //        i++;
-                //    else
-                //        j--;
+                int i = 0;
+                int j = nums.Length - 1;                        // setting j variable equal to the number length minus 1
+                int sum = nums[i] + nums[j];                    // creating a sum variable and setting it equal to nums array of I plus nums array of J 
+                while (sum != target)                           // creating a while loop , runs only while the sum variable is not equal to the target variable 
+                {
+                    if (sum < target)                           // if sum is less than target , increment i by 1 
+                        i++;
+                    else
+                        j--;                                    // else decrease J by i 
 
-                //    sum = nums[i] + nums[j];
-                //}
+                    sum = nums[i] + nums[j];                    // setting the sum equal to the nums array of I and J 
+                }
 
-              //  return new int[] { i + 1, j + 1 };
-              //  Console.WriteLine( i + 1, j + 1 ); 
-
-
+                var x =  new int[] { i + 1, j + 1 };            // setting var x equal to a new int array to print
+                Console.WriteLine(("" + string.Join(" ", x)));      //printing array as string 
+                
 
             }
             catch (Exception)
@@ -404,24 +421,24 @@ namespace DIS_Assignment_2_Fall_2021
             {
                 int result = 0;
                 int temp = 0;
-                foreach (var word in words)
+                foreach (var word in words)             // starting a foreach loop searching the words string array 
                 {
-                    foreach (var c in word)
+                    foreach (var c in word)         // nested foreach loop searching word variable 
                     {
-                        if (!allowed.Contains(c))
+                        if (!allowed.Contains(c))         // if not string allowed contains c break the loop 
                         {
                             break;
                         }
                         else
                         {
-                            temp++;
+                            temp++;                 // else increment the temp variable 
                         }
                     }
-                    result += temp / word.Length;
-                    temp = 0;
+                    result += temp / word.Length;       // updating the result variable plus temp variable divided by the length of word 
+                    temp = 0;                               // setting temp back to 2
                 }
 
-                return result;
+                return result;                      // returning result variable to method
                 // return 0;
             }
             catch (Exception)
@@ -455,13 +472,13 @@ namespace DIS_Assignment_2_Fall_2021
 
                 for ( int i = 0; i<nums1.Length; i++) // looping until i is equal or greater than nums1 array length
                 {
-                    ans[i] = Array.IndexOf(nums2, nums1[i]); 
+                    ans[i] = Array.IndexOf(nums2, nums1[i]);            //setting the array of I equal to the array index first occurance of nums1 of i
 
 
 
                 }
 
-                return ans;
+                return ans;                                                 // returning the int array values 
             }
             catch (Exception)
             {
@@ -488,19 +505,19 @@ namespace DIS_Assignment_2_Fall_2021
         {
             try
             {
-                int max_sum = 0;
-                int current_sum = 0;
-                int n = arr.Length;
+                int max = 0;            
+                int sum = 0;
+                int n = arr.Length;             // creating int variable n and setting to arr length 
 
-                for (int i = 0; i < n; i++)
+                for (int i = 0; i < n; i++)         // starting for loop , runs until current iteration is equal or greater than arr length
                 {
-                    current_sum = current_sum + arr[i];
-                    if (current_sum < 0)
-                        current_sum = 0;
-                    if (max_sum < current_sum)
-                        max_sum = current_sum;
+                    sum = sum + arr[i];         // setting sum equal to 0 plus arr of the current iteration 
+                    if (sum < 0)                // IF sum is less than sum , then set sum equal to 0 
+                        sum = 0;
+                    if (max < sum)                  // if max is less than sum then set max equal to sum 
+                        max = sum;
                 }
-                return max_sum;
+                return max;                     // returning max 
              //   return 0;
             }
             catch (Exception)
@@ -534,21 +551,21 @@ namespace DIS_Assignment_2_Fall_2021
             {
                 //write your code here.
                 var sum = 0;
-                var len = int.MaxValue;
+                var len = int.MaxValue;         // setting len to int max value 
                 var j = 0;
 
-                for (var i = 0; i < arr10.Length; i++)
-                {
-                    sum += arr10[i];
+                for (var i = 0; i < arr10.Length; i++)      // starting for loop and runs until i is equal or greater than the array10 length 
+                {   
+                    sum += arr10[i];                        // adding sum to the array10 current loop iteration 
 
-                    while (sum >= target_subarray_sum)
+                    while (sum >= target_subarray_sum)      // while loop executing only while sum is greater than or eqaul to target sub array 
                     {
-                        len = Math.Min(len, i - j + 1);
-                        sum -= arr10[j++];
+                        len = Math.Min(len, i - j + 1); //returning the min value.  Len variable or I minus J plus 1    
+                        sum -= arr10[j++];                  // sum minus arr10 of j increment by 1
                     }
                 }
 
-                return len == int.MaxValue ? 0 : len;
+                return len == int.MaxValue ? 0 : len;           //  returning the len where it is equal to the int maxvalue variable 
                // return 0;
 
             }
